@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-providers";
+import { QueryProvider } from "@/components/providers/query-provider";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -28,11 +29,12 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="en"  suppressHydrationWarning
       className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider
+      <QueryProvider>
+          <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
@@ -40,6 +42,7 @@ export default function RootLayout({
           >
             {children}
           </ThemeProvider>
+      </QueryProvider>
       </body>
     </html>
   );
