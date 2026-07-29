@@ -1,0 +1,18 @@
+
+import { prisma } from "@/lib/db";
+import {auth} from "@clerk/nextjs/server";
+
+
+export async function requireUser(){
+    const {userId} = await auth.protect();
+
+    const user = await prisma.user.findUnique({
+        where:{
+            clerId : userId
+        }
+    })
+    if(!user){
+        throw new Error("User not found");
+    }
+    return user;
+}
