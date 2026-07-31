@@ -82,3 +82,22 @@ export async function deleteConversation(conversationId:string){
     
 }
 
+export async function updateConversation(conversationId:string,data:{title?:string,isPinned?:boolean,isArchived?:boolean}){
+    const user=await requireUser();
+    await assertOwnsConversation(conversationId,user.id);
+    const updatedConversation =await prisma.conversation.update({
+        where:{
+            id:conversationId,
+        },
+        data:{
+            ...(data.title !== undefined ? {title:data.title.trim() || "New Chat"} : {}),
+            ...(data.isPinned !== undefined ? {isPinned:data.isPinned} : {}),
+            ...(data.isArchived !== undefined ? {isArchived:data.isArchived} : {}),
+        }
+    })
+    revalidatePath('/')
+    revalidatePath(`/c/${conversationId}`)
+
+    return {id:conversationId};
+}
+
