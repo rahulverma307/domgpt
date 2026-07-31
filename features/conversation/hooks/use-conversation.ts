@@ -15,7 +15,7 @@ import { queryKeys } from "../utils/query-keys";
 
 export function useConversations() {
     return useQuery({
-        queryKey: queryKeys.conversation.all(),
+        queryKey: queryKeys.conversation.all,
         queryFn: () => listConversations(),
     });
 }
@@ -28,7 +28,7 @@ export function useCreateConversation() {
         mutationFn: (title?: string) => createConversation(title),
         onSuccess: (conversation) => {
             void queryClient.invalidateQueries({
-                queryKey: queryKeys.conversation.all(),
+                queryKey: queryKeys.conversation.all,
             });
             router.push(`/c/${conversation.id}`);
         },
@@ -54,7 +54,7 @@ export function useUpdateConversation() {
         }) => updateConversation(id, data),
         onSuccess: (conversation) => {
             void queryClient.invalidateQueries({
-                queryKey: queryKeys.conversation.all(),
+                queryKey: queryKeys.conversation.all,
             });
             void queryClient.invalidateQueries({
                 queryKey: queryKeys.conversation.detail(conversation.id),
@@ -75,7 +75,7 @@ export function useDeleteConversation(activeId?: string) {
         mutationFn: (id: string) => deleteConversation(id),
         onSuccess: ({ id }) => {
             void queryClient.invalidateQueries({
-                queryKey: queryKeys.conversation.all(),
+                queryKey: queryKeys.conversation.all,
             });
             queryClient.removeQueries({
                 queryKey: queryKeys.message.byConversationId(id),
