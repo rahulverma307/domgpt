@@ -73,9 +73,9 @@ export function AppSidebar() {
               render={<Link href="/" />}
             >
               <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-sm text-primary-foreground">
-                C
+                 O
               </span>
-              <span>ChaiGPT</span>
+              <span>domGPT</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
@@ -238,7 +238,7 @@ function SidebarFooterMenu() {
           className="w-full justify-start"
           onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
         >
-          Toggle theme
+          theme
         </Button>
       </SidebarMenuItem>
       <SidebarMenuItem>

@@ -7,6 +7,12 @@ type ConversationPageProps = {
 
 const page = async({params}:ConversationPageProps)=>{
   const {id} = await params;
+
+  try {
+    
+  } catch (error) {
+    
+  }
   return(
     <>
   <h1 className="text-3xl font-semibold">hello ji {id}</h1>
