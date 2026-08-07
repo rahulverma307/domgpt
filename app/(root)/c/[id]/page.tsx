@@ -1,5 +1,7 @@
 import { getConversation } from "@/features/conversation/actions/conversation.action";
 import { notFound } from "next/navigation";
+import { loadChatMessages } from "@/features/ai/actions/chat-store";
+import { ConversationView } from "@/features/conversation/components/conversion-view";
 import React from "react";
 
 
@@ -16,13 +18,15 @@ try{
 notFound()
 } 
 
-const intialMessages = await loadChatMessage(id)
+const intialMessages = await loadChatMessages(id)
 
 
   return(
-    <>
-  <h1 className="text-3xl font-semibold">hello ji {id}</h1>
-    </>
+    <ConversationView
+    key={id}
+    initialMessages={initialMessages}
+    conversationId={id}
+    />
   )
 }
 export default page
