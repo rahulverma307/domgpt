@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  Moon,
   MoreHorizontalIcon,
   PencilIcon,
   PinIcon,
   PinOffIcon,
   PlusIcon,
+  Sun,
   Trash2Icon,
 } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
@@ -225,6 +227,8 @@ function ChatItem({
 }
 
 /** Footer menu with theme toggle and Clerk user account button. */
+
+
 function SidebarFooterMenu() {
   const { resolvedTheme, setTheme } = useTheme();
 
@@ -235,12 +239,21 @@ function SidebarFooterMenu() {
           type="button"
           variant="ghost"
           size="sm"
-          className="w-full justify-start"
+          className="w-full justify-start gap-2"
           onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
         >
-          theme
+          {resolvedTheme === "dark" ? (
+            <Sun className="size-4" />
+          ) : (
+            <Moon className="size-4" />
+          )}
+
+          <span className="group-data-[collapsible=icon]:hidden">
+            {resolvedTheme === "dark" ? "Light Mode" : "Dark Mode"}
+          </span>
         </Button>
       </SidebarMenuItem>
+
       <SidebarMenuItem>
         <div className="flex items-center gap-2 px-1 py-1.5">
           <UserButton
